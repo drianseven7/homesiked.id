@@ -1,9 +1,9 @@
 const products = [
-  {id:1, name:"Kaos Putih", price:120000, img:"https://via.placeholder.com/200x200?text=Kaos+Putih"},
-  {id:2, name:"Jeans Slim Fit", price:250000, img:"https://via.placeholder.com/200x200?text=Jeans"},
-  {id:3, name:"Jaket Denim", price:350000, img:"https://via.placeholder.com/200x200?text=Jaket"},
-  {id:4, name:"Dress Casual", price:400000, img:"https://via.placeholder.com/200x200?text=Dress"},
-  {id:5, name:"Topi Hitam", price:80000, img:"https://via.placeholder.com/200x200?text=Topi"}
+  {id:1, name:"Kaos Putih", price:, img:"https://via.placeholder.com/200x200?text=Kaos+Putih"},
+  {id:2, name:"soon", price:, img:"https://via.placeholder.com/200x200?text=Jeans"},
+  {id:3, name:"soon", price:, img:"https://via.placeholder.com/200x200?text=Jaket"},
+  {id:4, name:"soon", price:, img:"https://via.placeholder.com/200x200?text=Dress"},
+  {id:5, name:"soon", price:, img:"https://via.placeholder.com/200x200?text=Topi"}
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
