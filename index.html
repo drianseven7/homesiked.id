@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homesiked Store</title>
+<title>Homesiked Catalog</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
 body{background:#0d0d0d;color:#f5f5f5;overflow-x:hidden;scroll-behavior:smooth;transition:0.3s;}
@@ -83,7 +83,7 @@ body.light footer{color:#555;}
 <body>
 
 <header>
-<h1>Homesiked Store</h1>
+<h1>Homesiked Catalog</h1>
 <button id="themeToggle">🌙</button>
 <nav>
 <ul>
@@ -97,7 +97,7 @@ body.light footer{color:#555;}
 
 <section class="hero">
 <div class="hero-overlay">
-<h1>Selamat Datang di Homesiked Store!</h1>
+<h1>Selamat Datang di Homesiked Catalog!</h1>
 <p>Temukan produk keren dengan harga terbaik.</p>
 <a href="#productList" class="btn">Belanja Sekarang</a>
 </div>
@@ -139,7 +139,7 @@ body.light footer{color:#555;}
 <script>
 // Produk
 const products=[
-  {name:"White Tshirt",desc:"Tshirt futuristik untuk gaya casual.",price:750000,img:"https://via.placeholder.com/400x300?text=Sneakers"},
+  {name:"White Tshirt",desc:"Tshirt futuristik untuk gaya casual.",price:750000,img:"https://share.google/images/6544kmrQ7xXz3Ia89/400x300?text=Sneakers"},
   {name:"Tshirt 2",desc:" untuk tampilan keren.",price:650000,img:"https://via.placeholder.com/400x300?text=Jaket"},
   {name:"Thsirt 3",desc:"Gaya unik.",price:500000,img:"https://via.placeholder.com/400x300?text=Ransel"},
   {name:"Tshirt 4",desc:"Tshirtkeren untuk gaya casual.",price:150000,img:"https://via.placeholder.com/400x300?text=Topi"},
@@ -209,7 +209,7 @@ document.getElementById("cartBtn").addEventListener("click",()=>{
   let text="Halo, saya ingin membeli:\n";
   let totalAll=0;
   cart.forEach(item=>{
-    text+=`- ${item.name} x${item.qty} = Rp ${(item.price*item.qty).toLocaleString()}\n`;
+    text+=`- ${item.name} x${item.qty} = Rp {(item.price*item.qty).toLocaleString()}\n`;
     totalAll+=item.price*item.qty;
   });
   text+=`Total: Rp ${totalAll.toLocaleString()}`;
