@@ -3,13 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Toko Modern</title>
+<title>Toko Modern Animasi</title>
 <style>
-/* Reset dan Font */
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
-body{background:#0d0d0d;color:#f5f5f5;overflow-x:hidden;scroll-behavior:smooth;}
-
-/* Header */
+body{background:#0d0d0d;color:#f5f5f5;overflow-x:hidden;}
 header{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:#111;border-bottom:1px solid #222;position:sticky;top:0;z-index:1000;}
 header h1{color:#00ffc6;font-size:1.5rem;}
 nav ul{list-style:none;display:flex;gap:20px;align-items:center;}
@@ -18,89 +15,8 @@ nav a:hover{color:#00ffc6;}
 .cart-icon{font-size:1.3rem;position:relative;cursor:pointer;transition:transform 0.2s;}
 .cart-icon:hover{transform:scale(1.1);}
 .cart-count{position:absolute;top:-8px;right:-10px;background:#00ffc6;color:#000;font-size:0.8rem;font-weight:bold;border-radius:50%;width:18px;height:18px;display:flex;justify-content:center;align-items:center;}
-
-/* Hero Section */
-.hero{
-  position: relative;
-  width: 100%;
-  height: 70vh;
-  background: url('https://via.placeholder.com/1600x800?text=Toko+Modern') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.hero-overlay{
-  background: rgba(0,0,0,0.6);
-  padding: 40px 60px;
-  text-align: center;
-  border-radius: 15px;
-  animation: fadeIn 1s ease forwards;
-}
-.hero h1{
-  font-size: 3rem;
-  color: #00ffc6;
-  margin-bottom: 20px;
-  text-shadow: 0 0 10px #00ffc6;
-}
-.hero p{
-  font-size: 1.2rem;
-  color: #f5f5f5;
-  margin-bottom: 30px;
-}
-.hero .btn{
-  font-size: 1rem;
-  padding: 12px 30px;
-  border-radius: 30px;
-  background: #00ffc6;
-  color: #000;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-.hero .btn:hover{
-  transform: scale(1.05);
-  box-shadow: 0 0 20px #00ffc6;
-}
-@keyframes fadeIn{
-  from {opacity: 0; transform: translateY(-20px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-/* Slider Promo */
-.slider{
-  width:100%;
-  overflow:hidden;
-  margin:40px 0;
-  position:relative;
-}
-.slides{
-  display:flex;
-  width:300%;
-  animation: slide 12s infinite;
-}
-.slide{
-  width:100%;
-  flex-shrink:0;
-  position:relative;
-}
-.slide img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  border-radius:15px;
-  transition:transform 0.3s;
-}
-.slide img:hover{transform:scale(1.05);}
-@keyframes slide{
-  0%,33%{transform:translateX(0);}
-  34%,66%{transform:translateX(-100%);}
-  67%,100%{transform:translateX(-200%);}
-}
-
-/* Produk */
-.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;padding:20px 60px;}
-.product-card{background:#141414;border:1px solid #222;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;position:relative;}
+.products{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;padding:60px;}
+.product-card{background:#141414;border:1px solid #222;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s;}
 .product-card:hover{transform:translateY(-5px);box-shadow:0 0 20px rgba(0,255,198,0.3);}
 .product-card img{width:100%;height:200px;object-fit:cover;transition:transform 0.4s;}
 .product-card:hover img{transform:scale(1.05);}
@@ -109,15 +25,27 @@ nav a:hover{color:#00ffc6;}
 .product-info .price{color:#00ffc6;font-weight:bold;}
 .btn{background:#00ffc6;color:#000;border:none;padding:8px 20px;border-radius:25px;font-weight:bold;cursor:pointer;transition:0.3s;margin:3px 2px;box-shadow:0 0 0 rgba(0,255,198,0);}
 .btn:hover{box-shadow:0 0 15px #00ffc6;transform:scale(1.05);}
-
-/* Testimoni */
-.testimonials{padding:60px 60px; text-align:center;}
-.testimonials h2{color:#00ffc6;margin-bottom:40px;}
-.testimonial-card{background:#141414;border:1px solid #222;border-radius:10px;padding:20px;display:inline-block;margin:10px;max-width:300px;}
-.testimonial-card p{color:#ccc;margin-bottom:15px;font-style:italic;}
-.testimonial-card span{color:#00ffc6;font-weight:bold;}
-
-/* Footer */
+.modal{display:flex;align-items:center;justify-content:center;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;background:rgba(0,0,0,0.8);opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
+.modal.show{opacity:1;pointer-events:auto;}
+.modal-content{background:#111;padding:30px;border-radius:15px;max-width:600px;width:90%;text-align:center;position:relative;transform:scale(0.7);transition:transform 0.4s ease;}
+.modal.show .modal-content{transform:scale(1);}
+.modal-content img{width:100%;border-radius:10px;margin-bottom:20px;transition:transform 0.4s;}
+.modal-content h2{color:#00ffc6;margin-bottom:10px;}
+.modal-content p{color:#ccc;margin-bottom:20px;}
+.close{position:absolute;top:15px;right:20px;font-size:1.5rem;color:#fff;cursor:pointer;transition:color 0.2s;}
+.close:hover{color:#ff5757;}
+#cartSidebar{position:fixed;right:-400px;top:0;width:350px;height:100%;background:#111;color:#f5f5f5;box-shadow:-2px 0 10px rgba(0,0,0,0.3);padding:30px;transition:right 0.5s cubic-bezier(0.68,-0.55,0.27,1.55);z-index:4000;display:flex;flex-direction:column;justify-content:space-between;}
+#cartSidebar.show{right:0;}
+#cartSidebar h2{color:#00ffc6;margin-bottom:15px;}
+.cart-item{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;border-bottom:1px solid #222;padding-bottom:10px;font-size:0.9rem;}
+.cart-controls{display:flex;align-items:center;gap:5px;}
+.qty-btn{background:#00ffc6;color:#000;border:none;border-radius:4px;width:22px;height:22px;cursor:pointer;font-weight:bold;transition:0.2s;}
+.qty-btn:hover{transform:scale(1.2);}
+.remove{color:#ff5757;cursor:pointer;margin-left:8px;transition:0.2s;}
+.remove:hover{transform:scale(1.2);}
+.cart-total{border-top:1px solid #222;padding-top:10px;font-weight:bold;color:#00ffc6;text-align:right;}
+#popup{position:fixed;top:20px;right:20px;background:#00ffc6;color:#000;padding:15px 25px;border-radius:10px;font-weight:600;box-shadow:0 0 20px rgba(0,255,198,0.5);opacity:0;pointer-events:none;transition:all 0.5s ease;transform:translateY(-20px);z-index:3000;}
+#popup.show{opacity:1;pointer-events:auto;transform:translateY(0);}
 footer{text-align:center;padding:40px 20px;border-top:1px solid #222;color:#888;font-size:0.9rem;}
 footer a{color:#00ffc6;text-decoration:none;}
 </style>
@@ -129,81 +57,176 @@ footer a{color:#00ffc6;text-decoration:none;}
 <nav>
 <ul>
 <li><a href="#">Beranda</a></li>
-<li><a href="#productList">Produk</a></li>
+<li><a href="#">Produk</a></li>
 <li><a href="https://instagram.com/namatoko" target="_blank">Instagram</a></li>
 <li class="cart-icon" id="cartBtn">🛒<span class="cart-count" id="cartCount">0</span></li>
 </ul>
 </nav>
 </header>
 
-<!-- Hero -->
-<section class="hero">
-  <div class="hero-overlay">
-    <h1>Selamat Datang di Toko Modern</h1>
-    <p>Produk berkualitas dengan desain futuristik</p>
-    <a href="#productList" class="btn">Lihat Produk</a>
-  </div>
-</section>
+<section class="products" id="productList"></section>
 
-<!-- Slider Promo -->
-<section class="slider">
-  <div class="slides">
-    <div class="slide"><img src="https://via.placeholder.com/1200x300?text=Promo+1" alt="Promo 1"></div>
-    <div class="slide"><img src="https://via.placeholder.com/1200x300?text=Promo+2" alt="Promo 2"></div>
-    <div class="slide"><img src="https://via.placeholder.com/1200x300?text=Promo+3" alt="Promo 3"></div>
-  </div>
-</section>
+<!-- Modal -->
+<div class="modal" id="productModal">
+<div class="modal-content">
+<span class="close" id="closeModal">&times;</span>
+<img id="modalImg" src="" alt="Produk">
+<h2 id="modalTitle"></h2>
+<p id="modalDesc"></p>
+<div class="price" id="modalPrice"></div>
+<br>
+<button class="btn" id="btnAddCart">Tambah ke Keranjang</button>
+</div>
+</div>
 
-<!-- Produk Unggulan -->
-<section class="products" id="productList">
-  <!-- Produk akan diisi oleh JS -->
-</section>
+<!-- Sidebar Keranjang -->
+<div id="cartSidebar">
+<div>
+<h2>Keranjang Belanja</h2>
+<div id="cartItems"></div>
+<div class="cart-total" id="cartTotal">Total: Rp 0</div>
+</div>
+<button class="btn" id="btnCheckout">Checkout via WhatsApp</button>
+</div>
 
-<!-- Testimoni -->
-<section class="testimonials">
-  <h2>Apa Kata Pelanggan</h2>
-  <div class="testimonial-card">
-    <p>"Produk sangat keren dan kualitasnya premium!"</p>
-    <span>- Rina S.</span>
-  </div>
-  <div class="testimonial-card">
-    <p>"Pelayanan cepat dan profesional, saya puas!"</p>
-    <span>- Dedi M.</span>
-  </div>
-  <div class="testimonial-card">
-    <p>"Desainnya futuristik dan elegan, love it!"</p>
-    <span>- Sari P.</span>
-  </div>
-</section>
+<div id="popup">Ditambahkan ke keranjang!</div>
 
-<!-- Footer -->
 <footer>
-<p>&copy; 2025 Toko Modern. Semua hak dilindungi. | <a href="https://instagram.com/namatoko" target="_blank">Instagram</a></p>
+<p>&copy; 2025 Toko Modern. Semua hak dilindungi.</p>
 </footer>
 
-<!-- Script Produk + Keranjang -->
 <script>
-// Contoh produk
-const products=[
-{name:"Produk Keren 1",price:250000,img:"https://via.placeholder.com/600x400?text=Produk+1"},
-{name:"Produk Keren 2",price:325000,img:"https://via.placeholder.com/600x400?text=Produk+2"},
-{name:"Produk Keren 3",price:420000,img:"https://via.placeholder.com/600x400?text=Produk+3"}
+const NOMOR_WA = "6281234567890";
+
+const products = [
+{name:"Produk Keren 1",price:250000,img:"https://via.placeholder.com/600x400?text=Produk+1",desc:"Produk elegan dengan desain modern."},
+{name:"Produk Keren 2",price:325000,img:"https://via.placeholder.com/600x400?text=Produk+2",desc:"Kualitas terbaik untuk gaya stylish."},
+{name:"Produk Keren 3",price:420000,img:"https://via.placeholder.com/600x400?text=Produk+3",desc:"Minimalis dan futuristik dengan bahan premium."}
 ];
 
-const productList=document.getElementById("productList");
+// Render produk
+const productList = document.getElementById("productList");
 products.forEach((p,i)=>{
-  productList.innerHTML+=`
-  <div class="product-card" id="product-${i}">
-    <img src="${p.img}" alt="${p.name}">
-    <div class="product-info">
-      <h3>${p.name}</h3>
-      <div class="price">Rp ${p.price.toLocaleString()}</div>
-      <div style="margin-top:10px;">
-        <button class="btn" onclick="alert('Beli cepat ${p.name}')">Beli Cepat</button>
-      </div>
-    </div>
-  </div>`;
+productList.innerHTML+=`
+<div class="product-card">
+<img src="${p.img}" alt="${p.name}">
+<div class="product-info">
+<h3>${p.name}</h3>
+<div class="price">Rp ${p.price.toLocaleString()}</div>
+<div style="margin-top:10px;">
+<button class="btn" onclick="beliCepat(${i})">Beli Cepat</button>
+<button class="btn" onclick="showDetail(${i})">Detail</button>
+</div>
+</div>
+</div>`;
 });
+
+// Modal
+const modal=document.getElementById("productModal");
+const closeModal=document.getElementById("closeModal");
+let currentProduct=null;
+function showDetail(index){
+const p=products[index];
+currentProduct=p;
+document.getElementById("modalImg").src=p.img;
+document.getElementById("modalTitle").textContent=p.name;
+document.getElementById("modalDesc").textContent=p.desc;
+document.getElementById("modalPrice").textContent="Rp "+p.price.toLocaleString();
+modal.classList.add("show");
+}
+closeModal.onclick=()=>modal.classList.remove("show");
+window.onclick=e=>{if(e.target===modal) modal.classList.remove("show");};
+
+// Beli Cepat
+function beliCepat(index){
+const item=products[index];
+const pesan=`Halo, saya ingin membeli produk berikut:%0A- ${item.name} (1x) - Rp ${item.price.toLocaleString()}%0ATerima kasih!`;
+window.open(`https://wa.me/${NOMOR_WA}?text=${pesan}`,"_blank");
+}
+
+// Keranjang
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
+const cartCount=document.getElementById("cartCount");
+const cartSidebar=document.getElementById("cartSidebar");
+const cartItems=document.getElementById("cartItems");
+const cartTotal=document.getElementById("cartTotal");
+
+function updateCart(){
+localStorage.setItem("cart",JSON.stringify(cart));
+cartCount.textContent=cart.reduce((a,b)=>a+b.qty,0);
+cartItems.innerHTML="";
+let total=0;
+cart.forEach((item,i)=>{
+total+=item.price*item.qty;
+cartItems.innerHTML+=`
+<div class="cart-item">
+<span>${item.name}</span>
+<div class="cart-controls">
+<button class="qty-btn" onclick="ubahQty(${i},-1)">-</button>
+<span>${item.qty}</span>
+<button class="qty-btn" onclick="ubahQty(${i},1)">+</button>
+<span>Rp ${(item.price*item.qty).toLocaleString()}</span>
+<span class="remove" onclick="hapusItem(${i})">❌</span>
+</div>
+</div>`;
+});
+cartTotal.textContent="Total: Rp "+total.toLocaleString();
+}
+
+document.getElementById("btnAddCart").onclick=()=>{
+if(currentProduct){
+const existing=cart.find(item=>item.name===currentProduct.name);
+if(existing) existing.qty++;
+else cart.push({...currentProduct,qty:1});
+updateCart();
+showPopup("Produk ditambahkan ke keranjang!");
+modal.classList.remove("show");
+}
+}
+
+function ubahQty(i,delta){
+cart[i].qty+=delta;
+if(cart[i].qty<=0) cart.splice(i,1);
+updateCart();
+}
+
+function hapusItem(i){
+cart.splice(i,1);
+updateCart();
+showPopup("Produk dihapus dari keranjang");
+}
+
+document.getElementById("cartBtn").onclick=()=>cartSidebar.classList.toggle("show");
+
+document.getElementById("btnCheckout").onclick=()=>{
+if(cart.length===0) return showPopup("Keranjang masih kosong!");
+let pesan="Halo, saya ingin memesan produk berikut:%0A";
+let total=0;
+cart.forEach((item,i)=>{
+pesan+=`%0A${i+1}. ${item.name} (${item.qty}x) - Rp ${(item.price*item.qty).toLocaleString()}`;
+total+=item.price*item.qty;
+});
+pesan+=`%0A%0ATotal: Rp ${total.toLocaleString()}%0A%0ATerima kasih!`;
+window.open(`https://wa.me/${NOMOR_WA}?text=${pesan}`,"_blank");
+}
+
+// Popup
+function showPopup(text){
+const popup=document.getElementById("popup");
+popup.textContent=text;
+popup.classList.add("show");
+setTimeout(()=>popup.classList.remove("show"),2500);
+}
+
+// Notifikasi Produk Baru
+function notifProdukBaru(namaProduk){
+showPopup(`Produk baru tersedia: ${namaProduk}`);
+}
+
+window.onload=()=>{
+updateCart();
+notifProdukBaru(products[0].name);
+}
 </script>
 
 </body>
