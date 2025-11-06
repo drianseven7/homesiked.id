@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Homesiked Catalog</title>
+<meta name="description" content="Katalog produk keren dari Homesiked. Temukan tshirt, aksesoris, dan fashion modern dengan harga terbaik.">
+<link rel="icon" href="https://via.placeholder.com/32x32?text=H" type="image/png">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
 body{background:#0d0d0d;color:#f5f5f5;overflow-x:hidden;scroll-behavior:smooth;transition:0.3s;}
@@ -17,23 +19,23 @@ nav a:hover{color:#00ffc6;}
 .cart-count{position:absolute;top:-8px;right:-10px;background:#00ffc6;color:#000;font-size:0.75rem;font-weight:bold;border-radius:50%;width:18px;height:18px;display:flex;justify-content:center;align-items:center;}
 #themeToggle{padding:5px 10px;border:none;border-radius:5px;cursor:pointer;font-size:0.9rem;transition:all 0.3s;background:#222;color:#fff;}
 #themeToggle:hover{background:#00ffc6;color:#000;}
-.hero{position: relative;width: 100%;height:50vh;background: url('https://via.placeholder.com/1200x600?text=Toko+Modern') center/cover no-repeat;display: flex;align-items: center;justify-content: center;overflow: hidden;background-attachment: fixed;}
-.hero-overlay{background: rgba(0,0,0,0.6);padding: 20px 30px;text-align: center;border-radius: 15px;opacity:0;transform:translateY(30px);transition:all 1s ease-out;}
+.hero{position:relative;width:100%;height:50vh;background:url('https://via.placeholder.com/1200x600?text=Homesiked+Catalog') center/cover no-repeat;display:flex;align-items:center;justify-content:center;overflow:hidden;background-attachment:fixed;}
+.hero-overlay{background:rgba(0,0,0,0.6);padding:20px 30px;text-align:center;border-radius:15px;opacity:0;transform:translateY(30px);transition:all 1s ease-out;}
 .hero-overlay.active{opacity:1;transform:translateY(0);}
-.hero h1{font-size: 2rem;color: #00ffc6;margin-bottom: 10px;text-shadow: 0 0 20px #00ffc6;}
-.hero p{font-size: 1rem;color: #f5f5f5;margin-bottom: 20px;text-shadow: 0 0 10px #00ffc6;}
-.hero .btn{font-size: 0.9rem;padding: 10px 25px;border-radius:30px;background: #00ffc6;color: #000;font-weight: bold;text-decoration: none;transition: all 0.3s;}
-.hero .btn:hover{transform: scale(1.1);box-shadow: 0 0 25px #00ffc6,0 0 50px #00ffc6;}
-.slider{width:100%;overflow:hidden;margin:20px 0;position:relative;touch-action: pan-y;}
+.hero h1{font-size:2rem;color:#00ffc6;margin-bottom:10px;text-shadow:0 0 20px #00ffc6,0 0 15px rgba(0,0,0,0.8);}
+.hero p{font-size:1rem;color:#f5f5f5;margin-bottom:20px;text-shadow:0 0 10px #00ffc6,0 0 15px rgba(0,0,0,0.8);}
+.hero .btn{font-size:0.9rem;padding:10px 25px;border-radius:30px;background:#00ffc6;color:#000;font-weight:bold;text-decoration:none;transition:all 0.3s;}
+.hero .btn:hover{transform:scale(1.1);box-shadow:0 0 25px #00ffc6,0 0 50px #00ffc6;}
+.slider{width:100%;overflow:hidden;margin:20px 0;position:relative;touch-action:pan-y;}
 .slides{display:flex;width:300%;transition:transform 0.4s ease;}
-.slide{width:100%;flex-shrink:0;position:relative;cursor:grab;}
+.slide{width:100%;flex-shrink:0;cursor:grab;}
 .slide img{width:100%;height:200px;object-fit:cover;border-radius:10px;transition:transform 0.3s;}
 .slide img:hover{transform:scale(1.05);}
 .products{display:grid;grid-template-columns:1fr;gap:20px;padding:20px;opacity:0;transform:translateY(30px);transition:all 0.8s ease-out;}
 .products.active{opacity:1;transform:translateY(0);}
 @media(min-width:600px){.products{grid-template-columns:repeat(2,1fr);}}
 @media(min-width:900px){.products{grid-template-columns:repeat(3,1fr);}}
-.product-card{background:#141414;border:1px solid #222;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s, filter 0.3s;position:relative;}
+.product-card{background:#141414;border:1px solid #222;border-radius:10px;overflow:hidden;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s,filter 0.3s;position:relative;}
 .product-card:hover{transform:translateY(-5px) rotateX(5deg);box-shadow:0 0 30px #00ffc6,0 0 60px #00ffc6;filter:brightness(1.1);}
 .product-card img{width:100%;height:180px;object-fit:cover;transition:transform 0.4s;}
 .product-card:hover img{transform:scale(1.05);}
@@ -49,13 +51,11 @@ nav a:hover{color:#00ffc6;}
 .testimonial-card span{color:#00ffc6;font-weight:bold;font-size:0.9rem;}
 footer{text-align:center;padding:30px 15px;border-top:1px solid #222;color:#888;font-size:0.8rem;}
 footer a{color:#00ffc6;text-decoration:none;}
-
-/* Popup full-screen mobile */
-#popupOverlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:2000;opacity:0;transition:opacity 0.3s;}
+#popupOverlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);justify-content:center;align-items:center;z-index:2000;opacity:0;transition:opacity 0.3s;backdrop-filter:blur(6px);}
 #popupOverlay.show{display:flex;opacity:1;}
-#popup{background:#141414;padding:15px;border-radius:10px;width:95%;max-width:400px;position:relative;text-align:center;transform: scale(0.8);opacity:0;transition: transform 0.3s, opacity 0.3s;}
-#popupOverlay.show #popup{transform: scale(1);opacity:1;}
-#popup img{width:100%;border-radius:10px;margin-bottom:10px;transition:transform 0.3s;}
+#popup{background:#141414;padding:15px;border-radius:10px;width:95%;max-width:400px;position:relative;text-align:center;transform:scale(0.8);opacity:0;transition:transform 0.3s,opacity 0.3s;}
+#popupOverlay.show #popup{transform:scale(1);opacity:1;}
+#popup img{width:100%;border-radius:10px;margin-bottom:10px;}
 #popup h3{margin-bottom:5px;color:#00ffc6;font-size:1.2rem;}
 #popup p{color:#ccc;margin-bottom:10px;font-size:0.9rem;}
 #popup .price{color:#00ffc6;font-weight:bold;margin-bottom:10px;font-size:1rem;}
@@ -64,8 +64,6 @@ footer a{color:#00ffc6;text-decoration:none;}
 #popup button:hover{transform:scale(1.05);box-shadow:0 0 25px #00ffc6,0 0 50px #00ffc6;}
 #popup .closeBtn{position:absolute;top:8px;right:10px;font-size:1.2rem;color:#ccc;cursor:pointer;transition:color 0.3s;}
 #popup .closeBtn:hover{color:#fff;}
-
-/* Light Mode */
 body.light{background:#f5f5f5;color:#111;}
 body.light header{background:#fff;border-bottom:1px solid #ccc;}
 body.light nav a{color:#111;}
@@ -83,68 +81,67 @@ body.light footer{color:#555;}
 <body>
 
 <header>
-<h1>Homesiked Catalog</h1>
-<button id="themeToggle">🌙</button>
-<nav>
-<ul>
-<li><a href="#">Beranda</a></li>
-<li><a href="#productList">Produk</a></li>
-<li><a href="https://instagram.com/homesiked.id" target="_blank">Instagram</a></li>
-<li><span class="cart-icon" id="cartBtn">🛒<span class="cart-count" id="cartCount">0</span></span></li>
-</ul>
-</nav>
+  <h1>Homesiked Catalog</h1>
+  <button id="themeToggle">🌙</button>
+  <nav>
+    <ul>
+      <li><a href="#">Beranda</a></li>
+      <li><a href="#productList">Produk</a></li>
+      <li><a href="https://instagram.com/homesiked.id" target="_blank">Instagram</a></li>
+      <li><span class="cart-icon" id="cartBtn">🛒<span class="cart-count" id="cartCount">0</span></span></li>
+    </ul>
+  </nav>
 </header>
 
 <section class="hero">
-<div class="hero-overlay">
-<h1>Selamat Datang di Homesiked Catalog!</h1>
-<p>Temukan produk keren dengan harga terbaik.</p>
-<a href="#productList" class="btn">Belanja Sekarang</a>
-</div>
+  <div class="hero-overlay">
+    <h1>Selamat Datang di Homesiked Catalog!</h1>
+    <p>Temukan produk keren dengan harga terbaik.</p>
+    <a href="#productList" class="btn">Belanja Sekarang</a>
+  </div>
 </section>
 
 <div class="slider">
-<div class="slides">
-<div class="slide"><img src="https://share.google/images/xmoRc9lFPZxEzvjz5/400x200?text=Promo+1" alt=""></div>
-<div class="slide"><img src="https://https://share.google/images/T3C7clDV11gwRuHl2/400x200?text=Promo+2" alt=""></div>
-<div class="slide"><img src="https://https://share.google/images/6544kmrQ7xXz3Ia89/400x200?text=Promo+3" alt=""></div>
-</div>
+  <div class="slides">
+    <div class="slide"><img src="https://via.placeholder.com/400x200?text=Promo+1" alt="Promo 1"></div>
+    <div class="slide"><img src="https://via.placeholder.com/400x200?text=Promo+2" alt="Promo 2"></div>
+    <div class="slide"><img src="https://via.placeholder.com/400x200?text=Promo+3" alt="Promo 3"></div>
+  </div>
 </div>
 
 <section class="products" id="productList"></section>
 
 <section class="testimonials">
-<h2>Apa Kata Mereka?</h2>
-<div class="testimonial-card"><p>Produk kualitas bagus, cepat sampai!</p><span>Alice</span></div>
-<div class="testimonial-card"><p>Layanan customer support ramah dan membantu.</p><span>Bob</span></div>
-<div class="testimonial-card"><p>Desain modern dan unik, saya suka!</p><span>Charlie</span></div>
+  <h2>Apa Kata Mereka?</h2>
+  <div class="testimonial-card"><p>Produk kualitas bagus, cepat sampai!</p><span>Alice</span></div>
+  <div class="testimonial-card"><p>Layanan customer support ramah dan membantu.</p><span>Bob</span></div>
+  <div class="testimonial-card"><p>Desain modern dan unik, saya suka!</p><span>Charlie</span></div>
 </section>
 
 <footer>© 2025 Homesiked. All rights reserved.</footer>
 
 <!-- Popup -->
 <div id="popupOverlay">
-<div id="popup">
-<span class="closeBtn">&times;</span>
-<img id="popupImg" src="">
-<h3 id="popupName"></h3>
-<p id="popupDesc"></p>
-<div class="price" id="popupPrice"></div>
-<input type="number" id="quantity" min="1" value="1">
-<br>
-<button id="buyBtn">Tambahkan ke Keranjang</button>
-</div>
+  <div id="popup">
+    <span class="closeBtn">&times;</span>
+    <img id="popupImg" src="">
+    <h3 id="popupName"></h3>
+    <p id="popupDesc"></p>
+    <div class="price" id="popupPrice"></div>
+    <input type="number" id="quantity" min="1" value="1"><br>
+    <button id="buyBtn">Tambahkan ke Keranjang</button>
+  </div>
 </div>
 
 <script>
 // Produk
 const products=[
-  {name:"White Tshirt",desc:"Tshirt futuristik untuk gaya casual.",price:750000,img:"https://share.google/images/6544kmrQ7xXz3Ia89/400x300?text=Sneakers"},
-  {name:"Tshirt 2",desc:" untuk tampilan keren.",price:650000,img:"https://via.placeholder.com/400x300?text=Jaket"},
-  {name:"Thsirt 3",desc:"Gaya unik.",price:500000,img:"https://via.placeholder.com/400x300?text=Ransel"},
-  {name:"Tshirt 4",desc:"Tshirtkeren untuk gaya casual.",price:150000,img:"https://via.placeholder.com/400x300?text=Topi"},
-  {name:"Tshirt 5",desc:" terbaru untuk hiburan.",price:1200000,img:"https://via.placeholder.com/400x300?text=VR"},
-  {name:"Tshurt 6",desc:"modern dengan fitur .",price:900000,img:"https://via.placeholder.com/400x300?text=Jam"}
+  {name:"White Tshirt",desc:"Tshirt futuristik untuk gaya casual.",price:750000,img:"https://via.placeholder.com/400x300?text=White+Tshirt"},
+  {name:"Black Tshirt",desc:"Tshirt hitam minimalis untuk tampilan keren.",price:650000,img:"https://via.placeholder.com/400x300?text=Black+Tshirt"},
+  {name:"Denim Jacket",desc:"Jaket denim stylish untuk gaya modern.",price:500000,img:"https://via.placeholder.com/400x300?text=Denim+Jacket"},
+  {name:"Cap Classic",desc:"Topi keren untuk gaya santai.",price:150000,img:"https://via.placeholder.com/400x300?text=Cap"},
+  {name:"Hoodie Street",desc:"Hoodie terbaru untuk gaya urban.",price:1200000,img:"https://via.placeholder.com/400x300?text=Hoodie"},
+  {name:"Smartwatch",desc:"Jam tangan modern dengan fitur pintar.",price:900000,img:"https://via.placeholder.com/400x300?text=Smartwatch"}
 ];
 
 const productSection=document.getElementById("productList");
@@ -181,13 +178,11 @@ function showPopup(index){
 }
 
 quantityInput.addEventListener("input",()=>{
-  const qty=parseInt(quantityInput.value) || 1;
+  const qty=parseInt(quantityInput.value)||1;
   popupPrice.textContent="Total: Rp "+(selectedProduct.price*qty).toLocaleString();
 });
 
-document.querySelector(".closeBtn").addEventListener("click",()=>{
-  popupOverlay.classList.remove("show");
-});
+document.querySelector(".closeBtn").addEventListener("click",()=>popupOverlay.classList.remove("show"));
 
 // Keranjang
 let cart=[];
@@ -195,7 +190,7 @@ buyBtn.addEventListener("click",()=>{
   if(selectedProduct){
     const qty=parseInt(quantityInput.value)||1;
     const existing=cart.find(item=>item.name===selectedProduct.name);
-    if(existing){existing.qty+=qty;} else {cart.push({name:selectedProduct.name,price:selectedProduct.price,qty:qty});}
+    if(existing){existing.qty+=qty;}else{cart.push({name:selectedProduct.name,price:selectedProduct.price,qty:qty});}
     const totalItems=cart.reduce((sum,item)=>sum+item.qty,0);
     document.getElementById("cartCount").textContent=totalItems;
     popupOverlay.classList.remove("show");
@@ -209,7 +204,7 @@ document.getElementById("cartBtn").addEventListener("click",()=>{
   let text="Halo, saya ingin membeli:\n";
   let totalAll=0;
   cart.forEach(item=>{
-    text+=`- ${item.name} x${item.qty} = Rp {(item.price*item.qty).toLocaleString()}\n`;
+    text+=`- ${item.name} x${item.qty} = Rp ${(item.price*item.qty).toLocaleString()}\n`;
     totalAll+=item.price*item.qty;
   });
   text+=`Total: Rp ${totalAll.toLocaleString()}`;
@@ -226,15 +221,13 @@ window.addEventListener("scroll",()=>{
   if(window.scrollY>800){testimonialsSection.classList.add("active");}
 });
 
-// Slider otomatis + swipe mobile
+// Slider otomatis + swipe
 let currentSlide=0;
 const slides=document.querySelector(".slides");
 const totalSlides=document.querySelectorAll(".slide").length;
 let startX=0,endX=0;
 function showSlide(index){slides.style.transform=`translateX(-${index*100}%)`;}
-
 setInterval(()=>{currentSlide=(currentSlide+1)%totalSlides;showSlide(currentSlide);},4000);
-
 slides.addEventListener("touchstart",e=>{startX=e.touches[0].clientX;});
 slides.addEventListener("touchend",e=>{
   endX=e.changedTouches[0].clientX;
@@ -246,12 +239,12 @@ slides.addEventListener("touchend",e=>{
 // Dark/Light Mode
 const themeToggle=document.getElementById("themeToggle");
 const currentTheme=localStorage.getItem("theme")||"dark";
-if(currentTheme==="light"){document.body.classList.add("light"); themeToggle.textContent="🌙";}
-else{document.body.classList.remove("light"); themeToggle.textContent="☀️";}
+if(currentTheme==="light"){document.body.classList.add("light");themeToggle.textContent="🌙";}
+else{document.body.classList.remove("light");themeToggle.textContent="☀️";}
 themeToggle.addEventListener("click",()=>{
   if(document.body.classList.contains("light")){
     document.body.classList.remove("light");themeToggle.textContent="🌙";localStorage.setItem("theme","dark");
-  } else {
+  }else{
     document.body.classList.add("light");themeToggle.textContent="☀️";localStorage.setItem("theme","light");
   }
 });
