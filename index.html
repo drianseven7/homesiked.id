@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homesiked Store</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toko Modern</title>
   <style>
     * {
       margin: 0;
@@ -38,6 +38,7 @@
       list-style: none;
       display: flex;
       gap: 20px;
+      align-items: center;
     }
 
     nav a {
@@ -48,6 +49,28 @@
 
     nav a:hover {
       color: #00ffc6;
+    }
+
+    .cart-icon {
+      font-size: 1.3rem;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: #00ffc6;
+      color: #000;
+      font-size: 0.8rem;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .products {
@@ -139,7 +162,7 @@
       cursor: pointer;
     }
 
-    .btn-buy {
+    .btn {
       background: #00ffc6;
       color: #000;
       border: none;
@@ -148,27 +171,54 @@
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
+      margin: 5px;
     }
 
-    .btn-buy:hover {
+    .btn:hover {
       box-shadow: 0 0 15px #00ffc6;
     }
 
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      border-top: 1px solid #222;
-      color: #888;
-      font-size: 0.9rem;
+    /* Sidebar Keranjang */
+    #cartSidebar {
+      position: fixed;
+      right: -400px;
+      top: 0;
+      width: 350px;
+      height: 100%;
+      background: #111;
+      color: #f5f5f5;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+      padding: 30px;
+      transition: right 0.4s ease;
+      z-index: 4000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    footer a {
+    #cartSidebar.show {
+      right: 0;
+    }
+
+    #cartSidebar h2 {
       color: #00ffc6;
-      text-decoration: none;
+      margin-bottom: 15px;
     }
 
-    footer a:hover {
-      color: #fff;
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #222;
+      padding-bottom: 10px;
+    }
+
+    .cart-total {
+      border-top: 1px solid #222;
+      padding-top: 10px;
+      font-weight: bold;
+      color: #00ffc6;
+      text-align: right;
     }
 
     #popup {
@@ -191,16 +241,30 @@
       opacity: 1;
       pointer-events: auto;
     }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      border-top: 1px solid #222;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00ffc6;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Homesiked Store</h1>
+    <h1>Toko Modern</h1>
     <nav>
       <ul>
         <li><a href="#">Beranda</a></li>
         <li><a href="#">Produk</a></li>
-        <li><a href="https://instagram.com/homesiked.id" target="_blank">Instagram</a></li>
+        <li><a href="https://instagram.com/namatoko" target="_blank">Instagram</a></li>
+        <li class="cart-icon" id="cartBtn">🛒<span class="cart-count" id="cartCount">0</span></li>
       </ul>
     </nav>
   </header>
@@ -216,38 +280,33 @@
       <p id="modalDesc"></p>
       <div class="price" id="modalPrice"></div>
       <br>
-      <button class="btn-buy" id="btnBuy">Beli Sekarang</button>
+      <button class="btn" id="btnAddCart">Tambah ke Keranjang</button>
     </div>
   </div>
 
-  <div id="popup">Membuka WhatsApp...</div>
+  <!-- Sidebar Keranjang -->
+  <div id="cartSidebar">
+    <div>
+      <h2>Keranjang Belanja</h2>
+      <div id="cartItems"></div>
+      <div class="cart-total" id="cartTotal">Total: Rp 0</div>
+    </div>
+    <button class="btn" id="btnCheckout">Checkout via WhatsApp</button>
+  </div>
+
+  <div id="popup">Ditambahkan ke keranjang!</div>
 
   <footer>
-    <p>&copy; 2025 Homesiked Store. Semua hak dilindungi.</p>
+    <p>&copy; 2025 Toko Modern. Semua hak dilindungi.</p>
   </footer>
 
   <script>
-    const NOMOR_WA = "628813837757"; // ← Ganti dengan nomor WhatsApp kamu
+    const NOMOR_WA = "6281234567890"; // Ganti dengan nomor WhatsApp kamu
 
     const products = [
-      {
-        name: "Produk Keren 1",
-        price: "Rp ",
-        img: "https://via.placeholder.com/600x400?text=Produk+1",
-        desc: "Produk elegan dengan desain modern, cocok untuk gaya kekinian."
-      },
-      {
-        name: "Produk Keren 2",
-        price: "Rp ",
-        img: "https://via.placeholder.com/600x400?text=Produk+2",
-        desc: "Kualitas terbaik untuk kamu yang ingin tampil stylish."
-      },
-      {
-        name: "Produk Keren 3",
-        price: "Rp ",
-        img: "https://via.placeholder.com/600x400?text=Produk+3",
-        desc: "Gaya minimalis dan futuristik dengan bahan premium."
-      }
+      { name: "Produk Keren 1", price: 250000, img: "https://via.placeholder.com/600x400?text=Produk+1", desc: "Produk elegan dengan desain modern." },
+      { name: "Produk Keren 2", price: 325000, img: "https://via.placeholder.com/600x400?text=Produk+2", desc: "Kualitas terbaik untuk gaya stylish." },
+      { name: "Produk Keren 3", price: 420000, img: "https://via.placeholder.com/600x400?text=Produk+3", desc: "Minimalis dan futuristik dengan bahan premium." }
     ];
 
     const productList = document.getElementById('productList');
@@ -257,37 +316,89 @@
           <img src="${p.img}" alt="${p.name}">
           <div class="product-info">
             <h3>${p.name}</h3>
-            <div class="price">${p.price}</div>
+            <div class="price">Rp ${p.price.toLocaleString()}</div>
           </div>
         </div>
       `;
     });
 
+    // ==== Modal Produk ====
     const modal = document.getElementById("productModal");
     const closeModal = document.getElementById("closeModal");
+    let currentProduct = null;
 
     function showDetail(index) {
       const p = products[index];
+      currentProduct = p;
       document.getElementById("modalImg").src = p.img;
       document.getElementById("modalTitle").textContent = p.name;
       document.getElementById("modalDesc").textContent = p.desc;
-      document.getElementById("modalPrice").textContent = p.price;
-      document.getElementById("btnBuy").onclick = () => bukaWhatsApp(p.name);
+      document.getElementById("modalPrice").textContent = "Rp " + p.price.toLocaleString();
       modal.style.display = "flex";
     }
 
     closeModal.onclick = () => modal.style.display = "none";
     window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
 
-    function bukaWhatsApp(namaProduk) {
-      const pesan = encodeURIComponent(`Halo, saya tertarik membeli ${namaProduk}. Apakah masih tersedia?`);
+    // ==== Keranjang ====
+    let cart = [];
+    const cartCount = document.getElementById("cartCount");
+    const cartSidebar = document.getElementById("cartSidebar");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+
+    document.getElementById("btnAddCart").onclick = () => {
+      if (currentProduct) {
+        cart.push(currentProduct);
+        updateCart();
+        showPopup("Produk ditambahkan ke keranjang!");
+        modal.style.display = "none";
+      }
+    };
+
+    function updateCart() {
+      cartCount.textContent = cart.length;
+      cartItems.innerHTML = "";
+      let total = 0;
+      cart.forEach((item) => {
+        total += item.price;
+        cartItems.innerHTML += `
+          <div class="cart-item">
+            <span>${item.name}</span>
+            <span style="color:#00ffc6;">Rp ${item.price.toLocaleString()}</span>
+          </div>
+        `;
+      });
+      cartTotal.textContent = "Total: Rp " + total.toLocaleString();
+    }
+
+    document.getElementById("cartBtn").onclick = () => {
+      cartSidebar.classList.toggle("show");
+    };
+
+    // ==== Checkout via WhatsApp ====
+    document.getElementById("btnCheckout").onclick = () => {
+      if (cart.length === 0) {
+        showPopup("Keranjang masih kosong!");
+        return;
+      }
+      let pesan = "Halo, saya ingin memesan produk berikut:%0A";
+      let total = 0;
+      cart.forEach((item, i) => {
+        pesan += `%0A${i+1}. ${item.name} - Rp ${item.price.toLocaleString()}`;
+        total += item.price;
+      });
+      pesan += `%0A%0ATotal: Rp ${total.toLocaleString()}%0A%0ATerima kasih!`;
       const url = `https://wa.me/${NOMOR_WA}?text=${pesan}`;
+      window.open(url, "_blank");
+    };
+
+    // ==== Popup Notifikasi ====
+    function showPopup(text) {
       const popup = document.getElementById("popup");
+      popup.textContent = text;
       popup.classList.add("show");
-      setTimeout(() => {
-        popup.classList.remove("show");
-        window.open(url, "_blank");
-      }, 800);
+      setTimeout(() => popup.classList.remove("show"), 2500);
     }
   </script>
 </body>
