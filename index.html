@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homesiked Store</title>
   <style>
-    /* Reset dasar */
     * {
       margin: 0;
       padding: 0;
@@ -16,7 +15,6 @@
     body {
       background-color: #0d0d0d;
       color: #f5f5f5;
-      line-height: 1.6;
     }
 
     header {
@@ -32,9 +30,8 @@
     }
 
     header h1 {
-      font-size: 1.5rem;
       color: #00ffc6;
-      letter-spacing: 1px;
+      font-size: 1.5rem;
     }
 
     nav ul {
@@ -53,40 +50,6 @@
       color: #00ffc6;
     }
 
-    .hero {
-      text-align: center;
-      padding: 100px 20px;
-      background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100%);
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      color: #00ffc6;
-    }
-
-    .hero p {
-      color: #ccc;
-      font-size: 1.1rem;
-      margin-bottom: 30px;
-    }
-
-    .btn-primary {
-      background: #00ffc6;
-      color: #000;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 15px #00ffc6;
-    }
-
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -100,6 +63,7 @@
       border-radius: 10px;
       overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
     }
 
     .product-card:hover {
@@ -119,19 +83,75 @@
 
     .product-info h3 {
       margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .product-info p {
-      color: #aaa;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
     }
 
     .product-info .price {
       color: #00ffc6;
       font-weight: bold;
-      font-size: 1.1rem;
+    }
+
+    /* Modal Detail Produk */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-content img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .modal-content h2 {
+      color: #00ffc6;
+      margin-bottom: 10px;
+    }
+
+    .modal-content p {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .btn-buy {
+      background: #00ffc6;
+      color: #000;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-buy:hover {
+      box-shadow: 0 0 15px #00ffc6;
     }
 
     footer {
@@ -147,11 +167,29 @@
       text-decoration: none;
     }
 
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        gap: 10px;
-      }
+    footer a:hover {
+      color: #fff;
+    }
+
+    #popup {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #00ffc6;
+      color: #000;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-weight: 600;
+      box-shadow: 0 0 20px rgba(0, 255, 198, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 3000;
+    }
+
+    #popup.show {
+      opacity: 1;
+      pointer-events: auto;
     }
   </style>
 </head>
@@ -162,71 +200,95 @@
       <ul>
         <li><a href="#">Beranda</a></li>
         <li><a href="#">Produk</a></li>
-        <li><a href="#">Tentang</a></li>
-        <li><a href="#">Kontak</a></li>
-        <li><a href="https://instagram.com/homesiked.id" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="https://instagram.com/homesiked.id" target="_blank">Instagram</a></li>
       </ul>
     </nav>
   </header>
 
-  <section class="hero">
-    <h2>Temukan Produk Terbaikmu</h2>
-    <p>Belanja dengan gaya dan kemudahan di toko online kami.</p>
-    <button class="btn-primary">Belanja Sekarang</button>
-  </section>
+  <section class="products" id="productList"></section>
 
-  <section class="products">
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x250" alt="Produk 1" />
-      <div class="product-info">
-        <h3>Produk Keren 1</h3>
-        <p>Desain elegan dan modern.</p>
-        <div class="price">Rp </div>
-      </div>
+  <!-- Modal Detail Produk -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <img id="modalImg" src="" alt="Produk">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div class="price" id="modalPrice"></div>
+      <br>
+      <button class="btn-buy" id="btnBuy">Beli Sekarang</button>
     </div>
+  </div>
 
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x250" alt="Produk 2" />
-      <div class="product-info">
-        <h3>Produk Keren 2</h3>
-        <p>Kualitas terbaik untuk kamu.</p>
-        <div class="price">Rp </div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <img src="https://via.placeholder.com/300x250" alt="Produk 3" />
-      <div class="product-info">
-        <h3>Produk Keren 3</h3>
-        <p>Gaya minimalis dan futuristik.</p>
-        <div class="price">Rp </div>
-      </div>
-    </div>
-  </section>
+  <div id="popup">Membuka WhatsApp...</div>
 
   <footer>
-    <p>&copy; 2025 <a href="#">Homesiked Store</a>. Semua hak dilindungi.</p>
+    <p>&copy; 2025 Homesiked Store. Semua hak dilindungi.</p>
   </footer>
-</body>
-</html>
-
-<div id="popup">Produk berhasil ditambahkan ke keranjang!</div>
 
   <script>
-    function beli(namaProduk) {
-      // Popup notifikasi
-      const popup = document.getElementById("popup");
-      popup.textContent = `${namaProduk} berhasil ditambahkan ke keranjang!`;
-      popup.classList.add("show");
+    const NOMOR_WA = "628813837757"; // ← Ganti dengan nomor WhatsApp kamu
 
-      // Hilangkan popup setelah 2,5 detik
+    const products = [
+      {
+        name: "Produk Keren 1",
+        price: "Rp ",
+        img: "https://via.placeholder.com/600x400?text=Produk+1",
+        desc: "Produk elegan dengan desain modern, cocok untuk gaya kekinian."
+      },
+      {
+        name: "Produk Keren 2",
+        price: "Rp ",
+        img: "https://via.placeholder.com/600x400?text=Produk+2",
+        desc: "Kualitas terbaik untuk kamu yang ingin tampil stylish."
+      },
+      {
+        name: "Produk Keren 3",
+        price: "Rp ",
+        img: "https://via.placeholder.com/600x400?text=Produk+3",
+        desc: "Gaya minimalis dan futuristik dengan bahan premium."
+      }
+    ];
+
+    const productList = document.getElementById('productList');
+    products.forEach((p, i) => {
+      productList.innerHTML += `
+        <div class="product-card" onclick="showDetail(${i})">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="product-info">
+            <h3>${p.name}</h3>
+            <div class="price">${p.price}</div>
+          </div>
+        </div>
+      `;
+    });
+
+    const modal = document.getElementById("productModal");
+    const closeModal = document.getElementById("closeModal");
+
+    function showDetail(index) {
+      const p = products[index];
+      document.getElementById("modalImg").src = p.img;
+      document.getElementById("modalTitle").textContent = p.name;
+      document.getElementById("modalDesc").textContent = p.desc;
+      document.getElementById("modalPrice").textContent = p.price;
+      document.getElementById("btnBuy").onclick = () => bukaWhatsApp(p.name);
+      modal.style.display = "flex";
+    }
+
+    closeModal.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+    function bukaWhatsApp(namaProduk) {
+      const pesan = encodeURIComponent(`Halo, saya tertarik membeli ${namaProduk}. Apakah masih tersedia?`);
+      const url = `https://wa.me/${NOMOR_WA}?text=${pesan}`;
+      const popup = document.getElementById("popup");
+      popup.classList.add("show");
       setTimeout(() => {
         popup.classList.remove("show");
-      }, 2500);
+        window.open(url, "_blank");
+      }, 800);
     }
   </script>
 </body>
 </html>
-
-window.location.href = "https://wa.me/08813837757?text=Saya%20ingin%20beli%20Produk%20Keren%201";
-
