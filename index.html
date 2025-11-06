@@ -209,3 +209,20 @@
   </footer>
 </body>
 </html>
+<div id="popup">Produk berhasil ditambahkan ke keranjang!</div>
+
+  <script>
+    function beli(namaProduk) {
+      // Popup notifikasi
+      const popup = document.getElementById("popup");
+      popup.textContent = `${namaProduk} berhasil ditambahkan ke keranjang!`;
+      popup.classList.add("show");
+
+      // Hilangkan popup setelah 2,5 detik
+      setTimeout(() => {
+        popup.classList.remove("show");
+      }, 2500);
+    }
+  </script>
+</body>
+</html>
